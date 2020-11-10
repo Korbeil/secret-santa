@@ -35,8 +35,12 @@ class MessageSender
             $blocks[] = [
                 'type' => 'context',
                 'elements' => [
-                    ['type' => 'mrkdwn', 'text' => '_Find below a sample of the message that will be sent to each members of your Secret Santa._'],
+                    ['type' => 'mrkdwn', 'text' => '_Find below a *sample* of the message that will be sent to each members of your Secret Santa._'],
                 ],
+            ];
+
+            $blocks[] = [
+                'type' => 'divider',
             ];
         }
 
@@ -44,7 +48,7 @@ class MessageSender
             'type' => 'section',
             'text' => [
                 'type' => 'mrkdwn',
-                'text' => sprintf("Hi!\nYou have been chosen to be part of a Secret Santa :santa:!\n\n"),
+                'text' => sprintf("Hi!\nYou have been selected to be part of a Secret Santa :santa:!\n\n"),
             ],
         ];
 
@@ -105,7 +109,7 @@ class MessageSender
         $blocks[] = [
             'type' => 'context',
             'elements' => [
-                ['type' => 'plain_text', 'text' => 'That\'s a secret only shared with you! Someone has also been chosen to get you a gift.'],
+                ['type' => 'plain_text', 'text' => 'That\'s a secret we only shared with you! Someone has also been chosen to get you a gift.'],
                 ['type' => 'mrkdwn', 'text' => 'Powered by <https://secret-santa.team/|Secret-Santa.team>'],
             ],
         ];
@@ -132,7 +136,7 @@ class MessageSender
     public function sendAdminMessage(SecretSanta $secretSanta, string $code, string $spoilUrl, string $token): void
     {
         $text = sprintf(
-            'Dear Secret Santa admin,
+            'Dear Secret Santa *admin*,
 
 In case of trouble or if you need it for whatever reason, here is a way to retrieve the secret repartition:
 
