@@ -35,8 +35,12 @@ class MessageSender
             $blocks[] = [
                 'type' => 'context',
                 'elements' => [
-                    ['type' => 'mrkdwn', 'text' => '_Find below a sample of the message that will be sent to each members of your Secret Santa._'],
+                    ['type' => 'mrkdwn', 'text' => '_Find below a *sample* of the message that will be sent to each members of your Secret Santa._'],
                 ],
+            ];
+
+            $blocks[] = [
+                'type' => 'divider',
             ];
         }
 
@@ -44,7 +48,7 @@ class MessageSender
             'type' => 'section',
             'text' => [
                 'type' => 'mrkdwn',
-                'text' => sprintf("Hi!\nYou have been chosen to be part of a Secret Santa :santa:!\n\n"),
+                'text' => sprintf("Hi!\nYou have been selected to be part of a Secret Santa :santa:!\n\n"),
             ],
         ];
 
@@ -105,15 +109,14 @@ class MessageSender
         $blocks[] = [
             'type' => 'context',
             'elements' => [
-                ['type' => 'plain_text', 'text' => 'That\'s a secret only shared with you! Someone has also been chosen to get you a gift.'],
+                ['type' => 'plain_text', 'text' => 'That\'s a secret we only shared with you! Someone has also been chosen to get you a gift.'],
                 ['type' => 'mrkdwn', 'text' => 'Powered by <https://secret-santa.team/|Secret-Santa.team>'],
             ],
         ];
 
         try {
             $response = $this->clientFactory->getClientForToken($token)->chatPostMessage([
-                'channel' => sprintf('@%s', $giver),
-                'username' => $isSample ? 'Secret Santa Preview' : 'Secret Santa Bot',
+                'channel' => $giver,
                 'icon_url' => 'https://secret-santa.team/images/logo.png',
                 'text' => $fallbackText,
                 'blocks' => json_encode($blocks),
@@ -133,7 +136,7 @@ class MessageSender
     public function sendAdminMessage(SecretSanta $secretSanta, string $code, string $spoilUrl, string $token): void
     {
         $text = sprintf(
-            'Dear Secret Santa admin,
+            'Dear Secret Santa *admin*,
 
 In case of trouble or if you need it for whatever reason, here is a way to retrieve the secret repartition:
 
@@ -151,7 +154,6 @@ Happy Secret Santa!',
         try {
             $response = $this->clientFactory->getClientForToken($token)->chatPostMessage([
                 'channel' => $secretSanta->getAdmin()->getIdentifier(),
-                'username' => 'Secret Santa Bot Spoiler',
                 'icon_url' => 'https://secret-santa.team/images/logo-spoiler.png',
                 'text' => $text,
             ]);

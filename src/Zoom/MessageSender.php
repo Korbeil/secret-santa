@@ -48,7 +48,7 @@ class MessageSender
             'body' => [
                 [
                     'type' => 'message',
-                    'text' => 'Hi! You have been *chosen* to be part of a Secret Santa ' . self::SANTA_EMOJI . '!',
+                    'text' => 'Hi! You have been *selected* to be part of a Secret Santa ' . self::SANTA_EMOJI . '!',
                 ],
             ],
         ];
@@ -56,7 +56,7 @@ class MessageSender
         if ($isSample) {
             $body['content']['head'] = [
                 'type' => 'message',
-                'text' => '_Find below a sample of the message that will be sent to each members of your Secret Santa._',
+                'text' => '_Find below a *sample* of the message that will be sent to each members of your Secret Santa._',
             ];
         }
 
@@ -94,7 +94,7 @@ class MessageSender
 
         $body['content']['body'][] = [
             'type' => 'message',
-            'text' => 'That\'s a secret only shared with you! Someone has also been chosen to get you a gift.'
+            'text' => 'That\'s a secret we only shared with you! Someone has also been chosen to get you a gift.'
                 . "\n" . 'https://secret-santa.team/',
             'italic' => true, // Not working on android
         ];
@@ -124,7 +124,7 @@ class MessageSender
     public function sendAdminMessage(SecretSanta $secretSanta, string $code, string $spoilUrl, string $token, string $accountId): void
     {
         $text = sprintf(
-            'Dear Secret Santa admin,
+            'Dear Secret Santa *admin*,
 
 In case of trouble or if you need it for whatever reason, here is a way to retrieve the secret repartition:
 
